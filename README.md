@@ -1,0 +1,2 @@
+# codeforces_rust
+使用rust解决codeforces上一些题目
