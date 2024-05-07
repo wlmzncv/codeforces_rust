@@ -77,8 +77,66 @@ mod round_896 {
             println!("{}", mini_cost);
         }
     }
+    pub fn fun_c(){
+        //生成长度为m的全排列作为矩阵的一行 i指示0值的下标
+        fn help_1(m:u32, i:u32){
+            let mut t0 = m-i;
+            if t0==m{
+                t0 = 0;
+            }
+            for i in 0..m-1{
+                let mut t1 = t0+i;
+                if t1>=m{
+                    t1 = t1-m;
+                }
+                print!("{} ",t1);
+            }
+            t0 = t0+m-1;
+            if t0>=m{
+                t0 = t0-m;
+            }
+            println!("{}",t0);
+        }
+        let mut line = String::new();
+        stdin().read_line(&mut line).expect("read line error");
+        let t = line.trim().parse::<u32>().expect("line parse i64");
+        for _ in 1..=t {
+            line.clear();
+            stdin().read_line(&mut line).expect("read line error");
+            let mut i=0;
+            let mut n = 1u32;
+            let mut m = 1u32;
+            for item in line.split_whitespace() {
+                let t0 = item.parse::<u32>().expect("parse i64");
+                if i==0 {n=t0;}
+                else {m=t0;}
+                i += 1;
+            }
+            if m==1{
+                println!("{}",0);
+                for _ in 1..=n{
+                    println!("{}",0);
+                }
+            }
+            else if m>n{
+                println!("{}",n+1);
+                for i in 0..n{
+                    help_1(m, i);
+                }
+            }
+            else{
+                println!("{}",m);
+                for i in 0..m-1{
+                    help_1(m, i);
+                }
+                for _ in m-1..n{
+                    help_1(m, m-2);
+                }
+            }
+        }
+    }
 }
 
 fn main() {
-    round_896::fun_b()
+    round_896::fun_c()
 }
